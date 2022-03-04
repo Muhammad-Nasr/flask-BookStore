@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+     font-family:"Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     color: black;
+     letter-spacing: 0.9px;
+}
+
+h1{
+      line-height: 1.2;
+      text-transform: uppercase;
+      font-size: 3rem;
+
+    font-weight: 700;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    margin-top:0;
+}
+
+
+
+.home-image{
+    background:url('../images/book-love.jpg');
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+     background-size:cover;
+     color: white;
+     text-align: center;
+
+}
