@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{%block content %}
+<div class="home-image">
+    <h1> Welcome to BooksStore.<br> For you </h1>
+    <p>It's for you<br>You Can search for books, save books in your personal page.<br>
+        keep track of your bookstore and read more ! </p>
+</div>
+
+<form method="POST" class="home-form" style="margin: 4rem 1rem;">
+    <div class="form-row">
+        <div class="form-group ">
+            {{ form.hidden_tag() }}
+            {{ form.search(class="form-control form-control-lg", style='height: 8rem; font-size: 2rem;') }}<br>
+            {{ form.submit(class="btn btn-secondary btn-lg") }}
+
+        </div>
+    </div>
+</form>
+
+
+<div class="container">
+    <h1 style="text-decoration:underline;">Self Help</h1>
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+                <img class="card-img-top" src="{{url_for('static', filename='/images/books-images/atomic-habits.jpg')}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">author: James Clear</h5>
+                    <p class="card-text">An Easy & Proven Way to Build Good Habits & Break Bad Ones.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+                <img class="card-img-top"
+                     src="{{url_for('static', filename='/images/books-images/think-grow-rich.jpg')}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">author: napoleon hill</h5>
+                    <p class="card-text">description: Think and Grow Rich has been called the "Granddaddy of All
+                        Motivational Literature.".</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+                <img class="card-img-top" src="{{ url_for('static', filename='/images/books-images/art_notcare.jpg')}} "
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">author: مارك مانسون</h5>
+                    <p class="card-text">يقولها لنا كما هي: جرعة من الحقيقة الفجِّة الصادقة المنعشة هي ما ينقصنا
+                        اليوم</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <h1 style="text-decoration:underline;">Biography</h1>
+    <br>
+    <div class="card-group">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="card card text-white bg-secondary mb-3">
+
+                    <img class="card-img-top"
+                         src="{{url_for('static', filename='/images/books-images/bio/malcolmx.jpg')}}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">author:Malcolm X</h5>
+                        <p class="card-text">His fascinating perspective on the lies and limitations of the American
+                            Dream, and the inherent racism in a society that denies its nonwhite citizens the
+                            opportunity to dream.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card card text-white bg-secondary mb-3">
+
+                    <img class="card-img-top"
+                         src="{{url_for('static', filename='/images/books-images/bio/helen-keller.jpg')}}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">author:Dorothy Herrmann</h5>
+                        <p class="card-text">Draws on the archives of Helen Keller's estate and the unpublished memoirs
+                            of Keller's teacher.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card card text-white bg-secondary mb-3">
+                    <img class="card-img-top" src="{{url_for('static', filename='/images/books-images/bio/ali.jpg')}}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"> author: Thomas Hauser</h5>
+                        <p class="card-text">A sweeping biography of one of the greatest and most provocative athletes
+                            of all time—“a
+                            life that needs to be understood whether you care a whit about boxing or not”.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <br>
+    <h1 style="text-decoration:underline;">Computer Science</h1>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+                <img class="card-img-top" src="{{url_for('static', filename='/images/books-images/cs/python-cs.jpg')}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">author: ['Reeta Sahoo, Gagan Sahoo']</h5>
+                    <p class="card-text">A series of Book of Computers . The ebook version does not contain CD..</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+                <img class="card-img-top"
+                     src="{{url_for('static', filename='/images/books-images/cs/foundation-cs.jpg')}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">author: ['Ramesh Hariharan', 'Madhavan Mukund', 'V. Vinay']</h5>
+                    <p class="card-text">This volume contains the proceedings of the 21st international conference on
+                        the Foundations of Software Technology and Theoretical Computer Science (FSTTCS 2001).</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card text-white bg-secondary mb-3">
+
+                <img class="card-img-top" src="{{url_for('static', filename='/images/books-images/cs/flask.jpg')}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Author:Miguel Grinberg</h5>
+                    <p class="card-text">Take full creative control of your web applications with Flask, the
+                        Python-based microframework.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
+

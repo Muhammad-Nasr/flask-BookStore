@@ -4,8 +4,10 @@
 <div class="container">
     {% for book in books %}
     {% if book.volumeInfo.imageLinks %}
-    <img src="{{ book.volumeInfo.imageLinks }}" >
-    {% endif %} 
+    <img src="{{ book.volumeInfo.imageLinks.smallThumbnail }}" >
+     <a href="{{book.volumeInfo.imageLinks.smallThumbnail}}">image</a>
+    {% endif %}
+
     <p>title: {{ book.volumeInfo.title }}</p>
     <p>subtitle: {{ book.volumeInfo.subtitle }}</p>
     <p>author: {{ book.volumeInfo.authors }}</p>
@@ -14,7 +16,7 @@
     <p>Preview<a href="{{ book.volumeInfo.previewLink }}"target="_blank"> Link</a></p>
     <p>Info<a href="{{ book.volumeInfo.previewLink }}"target="_blank"> Link</a></p>
     <p>Web Reader<a href="{{ book.accessInfo.webReaderLink }}" target="_blank"> Link</a></p>
-      <form method="post" action="{{url_for('bookshelf') }}">
+      <form method="post" action="{{url_for('main.bookshelf') }}">
         {{ form.hidden_tag()}}
         <input type="hidden" value="{{ book.id }}" name="book_id">
         {{ form.save(class='btn btn-primary btn-lg') }}
