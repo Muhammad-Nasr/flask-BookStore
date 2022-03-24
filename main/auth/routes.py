@@ -20,7 +20,7 @@ def register():
                       f' welcome {new_reader.username}!')
         db.session.add(new_reader)
         db.session.commit()
-        login_user(new_reader)
+
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
@@ -36,9 +36,6 @@ def login():
             return redirect(url_for('auth.login'))
 
         login_user(reader)
-        flash(message=f'congrats, you logged in successfully/'
-                      f'welcome  {reader.username}.')
-
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index', username=current_user.username)
