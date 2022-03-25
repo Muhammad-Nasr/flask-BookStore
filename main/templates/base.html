@@ -2,7 +2,9 @@
 
 {% block styles %}
 {{ super() }}
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block head %}
 {{ super() }}
@@ -29,6 +31,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
 
             </ul>
@@ -45,6 +48,9 @@
 
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% endif %}
+                <li><a href="https://github.com/Muhammad-Nasr/flask-BookStore">
+                                <i class="fa fa-github" style="font-size:24px;"></i>
+                            </a></li>
             </ul>
         </div>
     </div>
@@ -62,12 +68,16 @@
 
 </div>
 {% block app_content %}{% endblock %}
+{% block about %}{% endblock %}
 {% endblock %}
 
 
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
+
+     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 {% endblock %}
 
 

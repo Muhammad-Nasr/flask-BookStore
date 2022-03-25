@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
+<div class="container">
     <h1>Register</h1>
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
         </div>
     </div>
+</div>
+{% endblock %}
+
+
+{% block about %} {% include 'main/_about.html' %}{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+$(document).ready(function(){
+console.log('window is loaded')
+$('#ModelAbout').modal('show')
+})
+</script>
 {% endblock %}

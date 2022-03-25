@@ -21,7 +21,7 @@ def register():
         db.session.add(new_reader)
         db.session.commit()
         login_user(new_reader)
-        return redirect(url_for('main.index'))
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
 
@@ -41,7 +41,7 @@ def login():
 
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('main.reader', username=current_user.username)
+            next_page = url_for('main.index', username=current_user.username)
 
         return redirect(next_page)
 
@@ -53,3 +53,5 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+

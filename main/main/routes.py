@@ -16,6 +16,7 @@ URL_ID = 'https://www.googleapis.com/books/v1/volumes/{}'
 @bp.route('/home', methods=['GET', 'POST'])
 @login_required
 def index():
+
     form = SearchForm()
     if form.validate_on_submit():
         save_form = SaveForm()
@@ -108,4 +109,10 @@ def delete():
     flash('you removed the book successfully')
     db.session.commit()
     return redirect(url_for('main.reader', username=current_user.username))
+
+
+
+
+
+
 
