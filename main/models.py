@@ -12,7 +12,7 @@ def load_user(id):
 
 reader_book = db.Table('reader_book',
                        db.Column('reader_id', db.Integer, db.ForeignKey('reader.id')),
-                       db.Column('book_id', db.String, db.ForeignKey('book.id')))
+                       db.Column('book_id', db.Integer, db.ForeignKey('book.id')))
 
 class Reader(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
