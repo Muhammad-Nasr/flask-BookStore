@@ -13,18 +13,14 @@ def register():
         return redirect(url_for('main.index'))
     form = RegisterForm()
     if form.validate_on_submit():
-        new_reader = Reader(username=form.username.data,
+        new_reader = Reader(username=form.username.data.lower(),
                             email=form.email.data)
         new_reader.add_password(form.password.data)
         flash(message=f'Congrats, you have registered successfully,'
                       f' welcome {new_reader.username}!')
         db.session.add(new_reader)
         db.session.commit()
-<<<<<<< HEAD
-        login_user(new_reader)
-=======
 
->>>>>>> d0e5015e071f3fc2e63e0575d2c4474b1c333dd5
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
@@ -33,7 +29,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        reader = Reader.query.filter_by(username=form.username.data).first()
+        reader = Reader.query.filter_by(username=form.username.data.lower()).first()
 
         if reader is None or not reader.check_password(attempted_password=form.password.data):
             flash('Invalid username or password')
@@ -54,8 +50,4 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d0e5015e071f3fc2e63e0575d2c4474b1c333dd5

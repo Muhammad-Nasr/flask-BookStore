@@ -1,8 +1,11 @@
-from flask_login import UserMixin
-from main import db, login_manager
+from flask_login import UserMixin, current_user
+from main import db, login_manager, admin
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from hashlib import md5
+from flask_admin import AdminIndexView
+from flask_admin.contrib.sqla import ModelView
+from flask import redirect, url_for, request
 
 
 @login_manager.user_loader
@@ -68,4 +71,44 @@ class Book(db.Model):
         return f"<Book: {self.title}>"
 
 
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        if current_user.is_active:
+            if current_user.id == 1:
+                return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('main.index', next=request.url))
+
+
+class ReaderView(ModelView):
+    form_columns = ['id', 'username', 'email','password_hash' , 'last_seen']
+
+    def on_model_change(self, form, model, is_created):
+        model.password_hash = generate_password_hash(password=model.password_hash)
+
+    def is_accessible(self):
+        if current_user.is_active:
+            if current_user.id == 1:
+                return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+
+        return redirect(url_for('main.index', next=request.url))
+
+
+class BookView(ModelView):
+
+    def is_accessible(self):
+        if current_user.is_active:
+            if current_user.id == 1:
+                return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+
+        return redirect(url_for('main.index', next=request.url))
+
+
+admin.add_view(ReaderView(Reader, db.session))
+admin.add_view(BookView(Book, db.session))
 

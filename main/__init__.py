@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from config import BaseConfig
 from flask_login import LoginManager
 from flask_moment import Moment
-
+from flask_admin import Admin
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -13,7 +13,7 @@ migrate = Migrate()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 moment = Moment()
-
+admin = Admin()
 
 def create_app(config_class=BaseConfig):
     app = Flask(__name__)
@@ -25,6 +25,8 @@ def create_app(config_class=BaseConfig):
 
     bootstrap.init_app(app)
     moment.init_app(app)
+
+    admin.init_app(app, index_view=models.MyAdminIndexView())
 
     from main.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

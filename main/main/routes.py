@@ -7,7 +7,6 @@ from main import db
 from flask import render_template, url_for, redirect, request, flash
 from main.main.forms import SearchForm, SaveForm, EditForm
 
-
 URL = 'https://www.googleapis.com/books/v1/volumes?q={}&maxResults=30&country=US'
 URL_ID = 'https://www.googleapis.com/books/v1/volumes/{}'
 
@@ -16,7 +15,6 @@ URL_ID = 'https://www.googleapis.com/books/v1/volumes/{}'
 @bp.route('/home', methods=['GET', 'POST'])
 @login_required
 def index():
-
     form = SearchForm()
     if form.validate_on_submit():
         save_form = SaveForm()
@@ -53,11 +51,11 @@ def bookshelf():
 
                             year=book['volumeInfo']['publishedDate'] \
                                 if book['volumeInfo']['publishedDate'] else None,
-                            category = book ['volumeInfo']['categories']\
-                            if 'categories' in book ['volumeInfo'] else 'general',
+                            category=book['volumeInfo']['categories'] \
+                                if 'categories' in book['volumeInfo'] else 'general',
 
-
-                            img_url=book['volumeInfo']['imageLinks']['smallThumbnail'],
+                            img_url=book['volumeInfo']['imageLinks']['smallThumbnail'] \
+                                if 'imageLinks' in book['volumeInfo'] else None,
                             link=book['volumeInfo']['infoLink']
                             )
 
@@ -65,7 +63,7 @@ def bookshelf():
             current_user.save(new_book)
             db.session.commit()
 
-            flash(message=f'congrats, the book {new_book.title} added to your table successfully!')
+            flash(message=f'congrats, the book {new_book.title}: added to your table successfully!')
 
     return redirect(url_for('main.reader', username=current_user.username))
 
@@ -78,6 +76,7 @@ def reader(username):
 
     return render_template('main/reader.html', title='My bookshelf', books=books,
                            reader=reader)
+
 
 @bp.before_request
 def before_request():
@@ -109,10 +108,3 @@ def delete():
     flash('you removed the book successfully')
     db.session.commit()
     return redirect(url_for('main.reader', username=current_user.username))
-
-
-
-
-
-
-

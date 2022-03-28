@@ -40,7 +40,7 @@
         <th scope="row">{{ book.title }}</th>
         <td>{{ book.author }}</td>
         <td>{{ book.year }}</td>
-        <td><a>{{ book.link }}</a></td>
+        <td><a href="{{ book.link }}" target="_blank">Google Link</a></td>
         <td>{{ moment(book.date_added).format('L') }}</td>
         <td><a href="{{url_for('main.delete', book_id=book.id, reader_id=reader.id )}}" class="btn btn-primary">Delete</a> </td>
     </tr>
