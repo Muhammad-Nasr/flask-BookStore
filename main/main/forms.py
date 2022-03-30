@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, HiddenField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms import StringField, SubmitField, HiddenField, TextAreaField
+from wtforms.validators import DataRequired, ValidationError, Length, Email
 from main.models import Reader
 
 
@@ -27,3 +27,13 @@ class EditForm(FlaskForm):
             reader = Reader.query.filter_by(username=username.data).first()
             if reader:
                 raise ValidationError('Please use a different username')
+
+
+
+
+class ContactForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[Email(), DataRequired()])
+    message = TextAreaField('Message', validators=[
+        DataRequired(), Length(min=0, max=200)])
+    submit = SubmitField('Submit')

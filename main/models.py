@@ -71,6 +71,15 @@ class Book(db.Model):
         return f"<Book: {self.title}>"
 
 
+class ContactUs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    email = db.Column(db.String(120))
+    message = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
         if current_user.is_active:
@@ -111,4 +120,5 @@ class BookView(ModelView):
 
 admin.add_view(ReaderView(Reader, db.session))
 admin.add_view(BookView(Book, db.session))
+admin.add_view(ModelView(ContactUs, db.session))
 

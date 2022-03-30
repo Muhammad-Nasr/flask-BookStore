@@ -1,11 +1,11 @@
 from main.main import bp
 from flask_login import current_user, login_required
-from main.models import Reader, Book
+from main.models import Reader, Book, ContactUs
 from datetime import datetime
 import requests
 from main import db
 from flask import render_template, url_for, redirect, request, flash
-from main.main.forms import SearchForm, SaveForm, EditForm
+from main.main.forms import SearchForm, SaveForm, EditForm, ContactForm
 
 URL = 'https://www.googleapis.com/books/v1/volumes?q={}&maxResults=30&country=US'
 URL_ID = 'https://www.googleapis.com/books/v1/volumes/{}'
@@ -108,3 +108,25 @@ def delete():
     flash('you removed the book successfully')
     db.session.commit()
     return redirect(url_for('main.reader', username=current_user.username))
+
+
+
+
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        new_contact = ContactUs(
+            name=form.name.data,
+            email=form.email.data,
+            message=form.message.data,
+        )
+        db.session.add(new_contact)
+        db.session.commit()
+        flash('your message sent successfully,'
+              'thanks for your contact,'
+              'we will get back to you soon🤙')
+        return redirect(url_for('main.contact'))
+
+    return render_template('main/contact.html', form=form, title='Contact')
