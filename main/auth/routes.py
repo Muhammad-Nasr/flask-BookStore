@@ -1,3 +1,5 @@
+import os
+
 from main.auth import bp
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
@@ -28,13 +30,15 @@ def register():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    print(os.environ.get('DATABASE_URL'))
     if form.validate_on_submit():
         reader = Reader.query.filter_by(username=form.username.data.lower()).first()
 
         if reader is None or not reader.check_password(attempted_password=form.password.data):
             flash('Invalid username or password')
+            print('no')
             return redirect(url_for('auth.login'))
-
+        print('yes')
         login_user(reader)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':

@@ -48,9 +48,7 @@
 
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% endif %}
-                <li><a href="https://github.com/Muhammad-Nasr/flask-BookStore" target="_blank">
-                                <i class="fa fa-github" style="font-size:24px;"></i>
-                            </a></li>
+
             </ul>
         </div>
     </div>
@@ -69,8 +67,8 @@
 </div>
 {% block app_content %}{% endblock %}
 {% block about %}{% endblock %}
-<div class="footer navbar-fixed-bottom text-center ">
-    <nav class="navbar navbar-default">
+<div class="footer  text-center ">
+    <nav class="navbar navbar-default nav-footer" style="margin-bottom: 0px;">
 
 <span>
     <a class="footer-item" href="{{ url_for('main.contact')}}" style="padding: 20px; font-size: 3rem;">

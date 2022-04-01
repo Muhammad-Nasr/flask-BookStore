@@ -2,6 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+<div class="container">
     <h1>Contact Us</h1>
  <p class="display-4">
         You are welcome to say anything, your comments or any notes about the web.
@@ -11,6 +12,7 @@
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
         </div>
+    </div>
     </div>
 
 {% endblock %}
