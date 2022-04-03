@@ -5,7 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from hashlib import md5
 from flask_admin import AdminIndexView
 from flask_admin.contrib.sqla import ModelView
-from flask import redirect, url_for, request
+from flask import redirect, url_for, request, current_app
+import jwt
+from time import time
 
 
 @login_manager.user_loader
@@ -50,6 +52,20 @@ class Reader(UserMixin, db.Model):
     def is_saving(self, book):
         return self.books.filter(
             reader_book.c.book_id == book.id).count() > 0
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            current_app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return Reader.query.get(id)
 
     def __repr__(self):
         return f"<Reader: {self.username}>"
