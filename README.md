@@ -1,5 +1,6 @@
 <p class="lead">BookStore is a webapp based on Python-Flask using Google books api, database.
           <br>
+          I am using requests module and json to extract data from google books api.
           Book Store is a website for book readers. Reader can search for books by book name, author any common subject.
           Reader need to register to have his own account, Reader has a private page account and a table contains his bookshelf,
           so he can save his books and track you reading, edit, and delete.
