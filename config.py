@@ -1,10 +1,14 @@
 import os
+from dotenv import load_dotenv
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 class BaseConfig(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'how are you'
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
-        'postgres://', 'postgresql://')
+        'postgres://', 'postgresql://') or \
+                              'sqlite:///' + os.path.join(basedir, 'bookstore.db')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
