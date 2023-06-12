@@ -44,16 +44,23 @@ def bookshelf():
 
         else:
             book = requests.get(URL_ID.format(book_id)).json()
+            authors = book['volumeInfo']['authors']
+            author = authors[0] if isinstance(authors, list) else authors
+            
+            categories=book['volumeInfo']['categories'] \
+                                if 'categories' in book['volumeInfo'] else 'general'
+            
+            category = categories[0] if isinstance(categories, list) else categories
+                    
 
             new_book = Book(book_id=book['id'],
                             title=book['volumeInfo']['title'],
-                            author=book['volumeInfo']['authors'],
-
-                            year=book['volumeInfo']['publishedDate'] \
+                            author=author,
+                            year = book['volumeInfo']['publishedDate'] \
                                 if book['volumeInfo']['publishedDate'] else None,
-                            category=book['volumeInfo']['categories'] \
-                                if 'categories' in book['volumeInfo'] else 'general',
 
+                            category = category,
+                            
                             img_url=book['volumeInfo']['imageLinks']['smallThumbnail'] \
                                 if 'imageLinks' in book['volumeInfo'] else None,
                             link=book['volumeInfo']['infoLink']
@@ -64,6 +71,8 @@ def bookshelf():
             db.session.commit()
 
             flash(message=f'congrats, the book {new_book.title}: added to your table successfully!')
+    
+        return redirect(url_for('main.bookshelf'))
 
     return redirect(url_for('main.reader', username=current_user.username))
 

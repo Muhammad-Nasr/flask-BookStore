@@ -50,6 +50,8 @@ class Reader(UserMixin, db.Model):
             self.books.remove(book)
 
     def is_saving(self, book):
+        print(self.books.filter(
+            reader_book.c.book_id == book.id))
         return self.books.filter(
             reader_book.c.book_id == book.id).count() > 0
 
